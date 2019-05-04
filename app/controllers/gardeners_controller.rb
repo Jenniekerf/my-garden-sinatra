@@ -1,0 +1,3 @@
+class GardenersController < ApplicationController 
+  
+end
