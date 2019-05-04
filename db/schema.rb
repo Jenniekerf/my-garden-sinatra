@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20190504170611) do
   create_table "vegetables", force: :cascade do |t|
     t.string   "name"
     t.datetime "date_planted"
+    t.integer  "user_id"
   end
 
 end
