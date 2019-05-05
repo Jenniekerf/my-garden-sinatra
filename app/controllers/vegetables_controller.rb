@@ -1,3 +1,4 @@
+require 'pry'
 class VegetablesController < ApplicationController 
   
   get '/garden' do 
@@ -9,6 +10,10 @@ class VegetablesController < ApplicationController
     @vegetables = Vegetable.new(params)
     @vegetables.user_id = session[:user_id]
     @vegetables.save 
+  end
+  
+  get '/vegetables/new' do
+    erb: :'/vegetables/new'
   end
   
 end

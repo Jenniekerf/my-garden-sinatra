@@ -1,6 +1,19 @@
 require "pry"
 class GardenersController < ApplicationController 
   
+  get '/gardeners/:id' do
+    if !logged_in?
+      redirect '/garden'
+    end
+
+    @gardener = Gardener.find(params[:id])
+    if !@gardener.nil? && @gardener == current_user
+      erb :'gardener/show'
+    else
+      redirect '/gardeners/login'
+    end
+  end
+  
   get '/gardeners/login' do 
     erb :'/gardeners/login' 
   end
@@ -24,6 +37,7 @@ class GardenersController < ApplicationController
     @gardener = Gardener.new(username: params[:username], password_digest: params[:password])
     @gardener.save
     session[:user_id] = @gardener.id
+    redirect to '/garden'
   end
 
   
