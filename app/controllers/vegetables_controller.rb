@@ -7,17 +7,13 @@ class VegetablesController < ApplicationController
   end
   
   post '/garden' do 
-    @vegetables = Vegetable.new(params)
+    @vegetables =  Vegetable.create(params)
     @vegetables.user_id = session[:user_id]
-    @vegetables.save 
   end
   
   get '/vegetables/new' do
     erb :'/vegetables/new'
   end
   
-  post '/gardeners/show' do 
-    Vegetable.create(params)
-  end
   
 end

@@ -5,15 +5,16 @@ class GardenersController < ApplicationController
     erb :'/gardeners/login' 
   end
   
-  post '/login' do
-   @gardener = Gardener.find_by(:username => params[:username])
-   if @gardener 
-     session[:user_id] = @gardener.id
-   redirect to '/gardeners/show'
-   else 
-   redirect to '/gardeners/error'
-  end
-  end
+   post "/login" do
+		gardener = Gardener.find_by(username: params[:username])
+		#binding.pry
+		if gardener && gardener.authenticate(params[:password])
+    session[:user_id] = gardener.id
+		  redirect "/vegetables/garden"
+		else 
+		  redirect "/gardeners/error"
+		end
+	end
   
   
   get '/gardeners/:id' do
@@ -23,24 +24,31 @@ class GardenersController < ApplicationController
 
     @gardener = Gardener.find(params[:id])
     if !@gardener.empty? && @gardener == current_user
-      erb :'/gardeners/show'
+      erb :'/vegetables/garden'
     else
       redirect '/gardeners/login'
     end
   end
   
-  
-  
   get '/gardeners/error' do 
     erb :'/gardeners/error'
   end
   
+  get '/signup' do 
+    erb :'/gardeners/signup'
+  end
+  
+  get '/vegetables/garden' do
+    erb :'/vegetables/garden'
+  end
+  
   post '/signup' do
-    @gardener = Gardener.new(:username => params[:username], :password_digest => params[:password])
+    @gardener = Gardener.new(:username => params[:username], :password => params[:password])
     @gardener.save
+    #binding.pry
     session[:user_id] = @gardener.id
-    redirect to '/gardeners/show'
+    redirect to '/vegetables/garden'
   end
 end
 
-
+	

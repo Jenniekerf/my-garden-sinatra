@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :'gardeners/login'
+    erb :'gardeners/index'
   end
   
   helpers do
