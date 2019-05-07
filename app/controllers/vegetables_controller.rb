@@ -13,7 +13,11 @@ class VegetablesController < ApplicationController
   end
   
   get '/vegetables/new' do
-    erb: :'/vegetables/new'
+    erb :'/vegetables/new'
+  end
+  
+  post '/gardeners/show' do 
+    Vegetable.create(params)
   end
   
 end
