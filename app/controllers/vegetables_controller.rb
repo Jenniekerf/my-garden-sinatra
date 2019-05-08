@@ -15,5 +15,28 @@ class VegetablesController < ApplicationController
     erb :'/vegetables/new'
   end
   
+  post "/vegetables" do
+    redirect "/vegetables"
+  end
+
+  get "/vegetables/:id" do
+    erb :"/vegetables/garden"
+  end
+
+  get "/vegetables/:id/edit" do
+    @vegetables = Vegetable.all
+    erb :"/vegetables/edit"
+  end
+
+  patch "/vegetables/:id" do
+    redirect "/vegetables/:id"
+  end
+
+  delete "/vegetables/:id/delete" do
+    redirect "/vegetables"
+  end
+
+
+  
   
 end
