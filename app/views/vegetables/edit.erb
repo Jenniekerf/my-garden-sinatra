@@ -1,15 +1,19 @@
-require "pry"
-binding.pry
-<%= @vegetables.name %>
-
-<br><br>
-
-<form action="/vegetables/<%= @vegetables.id %>" method="POST">
+<form method="POST" action="/vegetables/<%= @vegetable.id %>"> 
   <input type="hidden" name="_method" value="PATCH">
-  <input type="text" name="content">
+  <label>Edit Name:</label>
+  <input type="text" name="name" value="<%=@vegetable.name%>">
+  <label>Change Date:</label>
+  <input id="datetime" type="date" name="date_planted"><br>
   <input id="submit" type="submit" name="Edit Garden">
 </form>
 
-<br><br>
+<br></br>
+
+<form action="/vegetables/<%= @vegetable.id %>" method="POST">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete">
+</form>
+
+
 
 

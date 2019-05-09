@@ -7,8 +7,11 @@ class VegetablesController < ApplicationController
   end
   
   post '/garden' do 
-    @vegetables =  Vegetable.create(params)
-    @vegetables.user_id = session[:user_id]
+    @gardener = Gardener.find_by(session[:id])
+    @vegetable =  Vegetable.create(params)
+    @vegetable.user_id = @gardener.id
+    @vegetable.save
+    redirect "/vegetables/#{@vegetable.id}"
   end
   
   get '/vegetables/new' do
@@ -20,23 +23,32 @@ class VegetablesController < ApplicationController
   end
 
   get "/vegetables/:id" do
+    @vegetable = Vegetable.find(params[:id])
     erb :"/vegetables/garden"
   end
 
   get "/vegetables/:id/edit" do
-    @vegetables = Vegetable.all
+    @gardener = Gardener.find_by(session[:id])
+    @vegetables = Vegetable.find(params[:id])
+    if @gardener.id = @vegetable.user_id 
     erb :"/vegetables/edit"
+  else 
+    erb :"/vegetables/failure"
   end
+end
 
   patch "/vegetables/:id" do
-    redirect "/vegetables/:id"
+  @vegetable = Vegetable.find_by_id(params[:id])
+  @vegetable.name = params[:name]
+  @vegetable.datetime = params[:datetime]
+  @vegetable.save
+    redirect "/vegetables/#{@vegetable.id}"
   end
 
-  delete "/vegetables/:id/delete" do
+  delete "/vegetables/:id" do
+    @vegetable = Vegetable.find(params[:id])
+    @vegetable.delete 
     redirect "/vegetables"
   end
 
-
-  
-  
 end

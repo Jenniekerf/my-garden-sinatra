@@ -1,8 +1,22 @@
 require "pry"
 class GardenersController < ApplicationController 
   
+  get '/signup' do 
+    erb :'gardeners/signup'
+  end
+  
+  post '/signup' do
+   if params[:username].empty? || params[:password].empty?
+     redirect '/signup'
+   else 
+     @gardener = Gardener.create(:username => params[:username], :password => params[:password])
+     session[:user_id] = @gardener.id
+    redirect to '/garden'
+  end
+end
+
   get '/login' do 
-    erb :'/gardeners/login' 
+    erb :'gardeners/login' 
   end
   
    post "/login" do
@@ -10,45 +24,24 @@ class GardenersController < ApplicationController
 		#binding.pry
 		if gardener && gardener.authenticate(params[:password])
     session[:user_id] = gardener.id
-		  redirect "/vegetables/garden"
 		else 
 		  redirect "/gardeners/error"
 		end
 	end
+	
+	get '/gardeners/error' do
+	  erb :'gardeners/error'
+	end
+	
+	get '/logout' do
+	  if seeion[:user_id] !=nil 
+	    session.destroy
+	    redirect 'gardeners/index'
+	  else 
+	    redirect 'gardeners/index'
+	  end
+ end 
   
-  
-  get '/gardeners/:id' do
-    if !logged_in?
-      redirect '/gardeners/login'
-    end
-
-    @gardener = Gardener.find(params[:id])
-    if !@gardener.empty? && @gardener == current_user
-      erb :'/vegetables/garden'
-    else
-      redirect '/gardeners/login'
-    end
-  end
-  
-  get '/gardeners/error' do 
-    erb :'/gardeners/error'
-  end
-  
-  get '/signup' do 
-    erb :'/gardeners/signup'
-  end
-  
-  get '/vegetables/garden' do
-    erb :'/vegetables/garden'
-  end
-  
-  post '/signup' do
-    @gardener = Gardener.new(:username => params[:username], :password => params[:password])
-    @gardener.save
-    #binding.pry
-    session[:user_id] = @gardener.id
-    redirect to '/vegetables/garden'
-  end
 end
 
 	
