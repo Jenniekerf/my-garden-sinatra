@@ -6,31 +6,31 @@ class VegetablesController < ApplicationController
     erb :'/vegetables/garden'
   end
   
-  post '/garden' do 
+  get '/vegetables' do 
+    erb :'/vegetables/home'
+  end
+  
+  get '/new' do 
+    erb :'/vegetables/new'
+  end
+  
+  post '/vegetables' do 
     @gardener = Gardener.find_by(session[:id])
     @vegetable =  Vegetable.create(params)
-    @vegetable.user_id = @gardener.id
+    @vegetable.users_id = @gardener.id
     @vegetable.save
     redirect "/vegetables/#{@vegetable.id}"
   end
   
-  get '/vegetables/new' do
-    erb :'/vegetables/new'
-  end
-  
-  post "/vegetables" do
-    redirect "/vegetables"
-  end
-
   get "/vegetables/:id" do
     @vegetable = Vegetable.find(params[:id])
-    erb :"/vegetables/garden"
+    erb :'/vegetables/show'
   end
 
   get "/vegetables/:id/edit" do
     @gardener = Gardener.find_by(session[:id])
     @vegetables = Vegetable.find(params[:id])
-    if @gardener.id = @vegetable.user_id 
+    if @gardener.id = @vegetable.users_id 
     erb :"/vegetables/edit"
   else 
     erb :"/vegetables/failure"
@@ -52,3 +52,6 @@ end
   end
 
 end
+  
+  
+  

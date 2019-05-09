@@ -11,7 +11,7 @@ class GardenersController < ApplicationController
    else 
      @gardener = Gardener.create(:username => params[:username], :password => params[:password])
      session[:user_id] = @gardener.id
-    redirect to '/garden'
+    redirect to '/vegetables'
   end
 end
 
@@ -24,6 +24,7 @@ end
 		#binding.pry
 		if gardener && gardener.authenticate(params[:password])
     session[:user_id] = gardener.id
+    redirect '/vegetables'
 		else 
 		  redirect "/gardeners/error"
 		end
