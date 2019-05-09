@@ -19,9 +19,8 @@ end
     erb :'gardeners/login' 
   end
   
-   post "/login" do
+   post '/login' do
 		gardener = Gardener.find_by(username: params[:username])
-		#binding.pry
 		if gardener && gardener.authenticate(params[:password])
     session[:user_id] = gardener.id
     redirect '/vegetables'
@@ -35,7 +34,7 @@ end
 	end
 	
 	get '/logout' do
-	  if seeion[:user_id] !=nil 
+	  if session[:user_id] !=nil 
 	    session.destroy
 	    redirect 'gardeners/index'
 	  else 
