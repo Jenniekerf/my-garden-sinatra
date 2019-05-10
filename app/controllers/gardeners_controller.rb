@@ -36,9 +36,9 @@ end
 	get '/logout' do
 	  if session[:user_id] !=nil 
 	    session.destroy
-	    redirect 'gardeners/index'
+	    erb :'gardeners/index'
 	  else 
-	    redirect 'gardeners/index'
+	     erb :'gardeners/index'
 	  end
  end 
   

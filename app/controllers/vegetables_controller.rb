@@ -10,15 +10,14 @@ class VegetablesController < ApplicationController
     erb :'/vegetables/home'
   end
   
-  get '/new' do 
+  get '/vegetables/new' do 
     erb :'/vegetables/new'
   end
   
   post '/vegetables' do 
     @gardener = Gardener.find_by(session[:id])
     @vegetable =  Vegetable.create(params)
-    @vegetable.users_id = @gardener.id
-    @vegetable.save
+    @vegetable.gardener = @gardener
     redirect "/vegetables/#{@vegetable.id}"
   end
   
@@ -29,8 +28,8 @@ class VegetablesController < ApplicationController
 
   get "/vegetables/:id/edit" do
     @gardener = Gardener.find_by(session[:id])
-    @vegetables = Vegetable.find(params[:id])
-    if @gardener.id = @vegetable.users_id 
+    @vegetable = Vegetable.find(params[:id])
+    if @gardener.id = @vegetable.gardener_id 
     erb :"/vegetables/edit"
   else 
     erb :"/vegetables/failure"
