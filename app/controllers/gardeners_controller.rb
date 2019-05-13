@@ -10,7 +10,7 @@ class GardenersController < ApplicationController
      redirect '/signup'
    else 
      @gardener = Gardener.create(:username => params[:username], :password => params[:password])
-     session[:user_id] = @gardener.id
+     session[:gardener_id] = @gardener.id
     redirect to '/vegetables'
   end
 end
@@ -22,7 +22,7 @@ end
    post '/login' do
 		gardener = Gardener.find_by(username: params[:username])
 		if gardener && gardener.authenticate(params[:password])
-    session[:user_id] = gardener.id
+    session[:gardener_id] = gardener.id
     redirect '/vegetables'
 		else 
 		  redirect "/gardeners/error"
@@ -34,7 +34,7 @@ end
 	end
 	
 	get '/logout' do
-	  if session[:user_id] !=nil 
+	  if session[:gardener_id] !=nil 
 	    session.destroy
 	    erb :'gardeners/index'
 	  else 
