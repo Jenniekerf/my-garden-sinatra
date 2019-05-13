@@ -7,8 +7,6 @@ class VegetablesController < ApplicationController
   end
   
   get '/vegetables' do 
-    @vegetables = Vegetable.all
-    binding.pry
     erb :'/vegetables/home'
   end
   
@@ -20,7 +18,6 @@ class VegetablesController < ApplicationController
     @gardener = Gardener.find_by(session[:id])
     @vegetable =  Vegetable.create(params)
     session[:gardener_id] = @gardener.id
-    @vegetable.save
     redirect "/vegetables/#{@vegetable.id}"
   end
   

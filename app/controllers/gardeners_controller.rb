@@ -6,6 +6,7 @@ class GardenersController < ApplicationController
   end
   
   post '/signup' do
+    binding.pry
    if params[:username].empty? || params[:password].empty?
      redirect '/signup'
    else 
@@ -20,7 +21,7 @@ end
   end
   
    post '/login' do
-		gardener = Gardener.find_by(username: params[:username])
+		gardener = Gardener.find_by(:username => params[:username])
 		if gardener && gardener.authenticate(params[:password])
     session[:gardener_id] = gardener.id
     redirect '/vegetables'
