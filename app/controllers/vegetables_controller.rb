@@ -7,11 +7,13 @@ class VegetablesController < ApplicationController
   end
   
   get '/vegetables' do 
+    @vegetables = Vegetable.all
+    binding.pry
     erb :'/vegetables/home'
   end
   
   get '/vegetables/new' do 
-    erb :'/vegetables/new'
+     erb :'/vegetables/new'
   end
   
   post '/vegetables' do 

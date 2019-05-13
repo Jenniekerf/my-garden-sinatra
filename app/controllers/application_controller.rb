@@ -14,11 +14,11 @@ class ApplicationController < Sinatra::Base
   end
   
   helpers do
-    def logged_in?
+    def logged_in?(session)
       !!session[:gardener_id]
     end 
     
-    def current_user
+    def current_user(session)
       Gardener.find(session[:gardener_id])
     end
   end
