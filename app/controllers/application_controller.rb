@@ -18,7 +18,7 @@ class ApplicationController < Sinatra::Base
       !!session[:gardener_id]
     end 
     
-    def current_user?
+    def current_user
       Gardener.find(session[:gardener_id])
     end
   end

@@ -17,8 +17,7 @@ class VegetablesController < ApplicationController
   post '/vegetables' do 
     @gardener = Gardener.find_by(session[:id])
     @vegetable =  Vegetable.create(params)
-    binding.pry
-    @vegetable.gardener_id = @gardener.id
+    session[:gardener_id] = @gardener.id
     @vegetable.save
     redirect "/vegetables/#{@vegetable.id}"
   end
@@ -31,7 +30,7 @@ class VegetablesController < ApplicationController
   get "/vegetables/:id/edit" do
     @gardener = Gardener.find_by(session[:id])
     @vegetable = Vegetable.find(params[:id])
-    if @gardener.id = @vegetable.gardener_id 
+    if session[:gardener_id] =  @gardener.id 
     erb :"/vegetables/edit"
   else 
     erb :"/vegetables/failure"
@@ -41,7 +40,7 @@ end
   patch "/vegetables/:id" do
   @vegetable = Vegetable.find_by_id(params[:id])
   @vegetable.name = params[:name]
-  @vegetable.datetime = params[:datetime]
+  @vegetable.date_planted = params[:date_planted]
   @vegetable.save
     redirect "/vegetables/#{@vegetable.id}"
   end
