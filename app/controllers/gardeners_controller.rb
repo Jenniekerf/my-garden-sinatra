@@ -6,7 +6,6 @@ class GardenersController < ApplicationController
   end
   
   post '/signup' do
-    binding.pry
    if params[:username].empty? || params[:password].empty?
      redirect '/signup'
    else 
