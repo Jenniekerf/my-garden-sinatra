@@ -17,7 +17,7 @@ class VegetablesController < ApplicationController
   post '/vegetables' do 
     @gardener = Gardener.find_by(session[:id])
     @vegetable =  Vegetable.create(params)
-    @vegetable.gardener = @gardener
+    @gardener.vegetables << @vegetable
     redirect "/vegetables/#{@vegetable.id}"
   end
   
