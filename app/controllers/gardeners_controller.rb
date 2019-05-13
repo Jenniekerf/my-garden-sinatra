@@ -32,15 +32,19 @@ end
 	get '/gardeners/error' do
 	  erb :'gardeners/error'
 	end
-	
-	get '/logout' do
-	  if session[:gardener_id] !=nil 
-	    session.destroy
-	    erb :'gardeners/index'
-	  else 
-	     erb :'gardeners/index'
-	  end
- end 
+ 
+ get '/gardeners/goodbye' do 
+   erb :'gardeners/goodbye'
+ end
+ 
+ post '/goodbye' do 
+    if session[:gardener_id] !=nil 
+	    session.clear
+   erb :'gardeners/goodbye'
+  end
+ end
+ 
+ 
   
 end
 
