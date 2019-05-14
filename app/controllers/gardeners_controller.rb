@@ -16,7 +16,13 @@ class GardenersController < ApplicationController
 end
 
   get '/login' do 
+    if !logged_in?
     erb :'gardeners/login' 
+  else 
+    @gardener = current_user
+    session[:gardener_id] = @gardener.id
+    redirect to '/vegetables'
+  end
   end
   
    post '/login' do
@@ -34,15 +40,16 @@ end
 	end
  
  get '/gardeners/goodbye' do 
+    session.clear
    erb :'gardeners/goodbye'
  end
  
- post '/goodbye' do 
-    if session[:gardener_id] !=nil 
-	    session.clear
-   erb :'gardeners/goodbye'
-  end
- end
+# post 'gardeners/goodbye' do 
+#     if session[:gardener_id] !=nil 
+	   
+#   erb :'gardeners/goodbye'
+#   end
+# end
  
  
   

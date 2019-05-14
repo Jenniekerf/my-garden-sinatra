@@ -7,7 +7,13 @@ class VegetablesController < ApplicationController
   end
   
   get '/vegetables' do 
+    if logged_in? && current_user
+      @gardener = current_user
+      session[:gardener_id] = @gardener.id
     erb :'/vegetables/home'
+  else 
+    redirect '/login'
+    end
   end
   
   get '/vegetables/new' do 
@@ -17,7 +23,6 @@ class VegetablesController < ApplicationController
   post '/vegetables' do 
     @gardener = Gardener.find_by(session[:id])
     @vegetable =  Vegetable.create(params)
-    #@gardener.vegetables << @vegetable
     redirect "/vegetables/#{@vegetable.id}"
   end
   
@@ -27,9 +32,8 @@ class VegetablesController < ApplicationController
   end
 
   get "/vegetables/:id/edit" do
-    @gardener = Gardener.find_by(session[:id])
+    if logged_in?
     @vegetable = Vegetable.find(params[:id])
-    if @gardener.id = @vegetable.gardener_id 
     erb :"/vegetables/edit"
   else 
     erb :"/vegetables/failure"
