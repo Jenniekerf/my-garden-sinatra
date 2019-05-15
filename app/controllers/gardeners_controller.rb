@@ -44,14 +44,6 @@ end
    erb :'gardeners/goodbye'
  end
  
-# post 'gardeners/goodbye' do 
-#     if session[:gardener_id] !=nil 
-	   
-#   erb :'gardeners/goodbye'
-#   end
-# end
- 
- 
   
 end
 

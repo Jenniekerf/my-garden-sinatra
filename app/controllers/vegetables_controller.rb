@@ -1,11 +1,6 @@
 require 'pry'
 class VegetablesController < ApplicationController 
   
-  # get '/garden' do 
-  #   @vegetables = Vegetable.all
-  #   erb :'/vegetables/garden'
-  # end
-  
   get '/vegetables' do 
     if logged_in? && current_user
       @gardener = current_user
