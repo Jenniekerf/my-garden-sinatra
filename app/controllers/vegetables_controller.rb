@@ -1,15 +1,14 @@
 require 'pry'
 class VegetablesController < ApplicationController 
   
-  get '/garden' do 
-    @vegetables = Vegetable.all
-    erb :'/vegetables/garden'
-  end
+  # get '/garden' do 
+  #   @vegetables = Vegetable.all
+  #   erb :'/vegetables/garden'
+  # end
   
   get '/vegetables' do 
     if logged_in? && current_user
       @gardener = current_user
-      session[:gardener_id] = @gardener.id
     erb :'/vegetables/home'
   else 
     redirect '/login'
@@ -23,6 +22,9 @@ class VegetablesController < ApplicationController
   post '/vegetables' do 
     @gardener = Gardener.find_by(session[:id])
     @vegetable =  Vegetable.create(params)
+    @vegetable.gardener_id = @gardener.id
+    @gardener.vegetables << @vegetable
+    @vegetable.save
     redirect "/vegetables/#{@vegetable.id}"
   end
   
