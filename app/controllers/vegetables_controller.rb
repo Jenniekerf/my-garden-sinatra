@@ -27,23 +27,23 @@ class VegetablesController < ApplicationController
     @vegetable = Vegetable.find(params[:id])
     erb :'/vegetables/show'
   end
-
-  get "/vegetables/:id/edit" do
-    if logged_in?
-    @vegetable = Vegetable.find(params[:id])
-    erb :"/vegetables/edit"
-  else 
-    erb :"/vegetables/failure"
-  end
-end 
-
-  patch "/vegetables/:id" do
-  @vegetable = Vegetable.find_by_id(params[:id])
+  
+  patch '/vegetables/:id' do
+  @vegetable = Vegetable.find(params[:id])
   @vegetable.name = params[:name]
   @vegetable.date_planted = params[:date_planted]
   @vegetable.save
     redirect "/vegetables/#{@vegetable.id}"
   end
+  
+  get '/vegetables/:id/edit' do
+    if logged_in?
+    @vegetable = Vegetable.find(params[:id])
+    erb :'/vegetables/edit'
+  else 
+     redirect '/login'
+  end
+end 
 
   delete "/vegetables/:id" do
     @vegetable = Vegetable.find(params[:id])

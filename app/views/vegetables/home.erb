@@ -2,7 +2,7 @@
 
 <ul>
 <% @gardener.vegetables.each do |veg| %>
-<li><%=veg.name%> - <%=veg.date_planted%></li>
+<li><%=veg.name%> - <%=veg.date_planted.strftime("%B %d, %Y")%></li>
 <% end %>
 </ul>
 
