@@ -29,7 +29,7 @@ class VegetablesController < ApplicationController
   end
   
   patch '/vegetables/:id' do
-  @vegetable = Vegetable.find(params[:id])
+  @vegetable = Vegetable.find_by_id(params[:id])
   @vegetable.name = params[:name]
   @vegetable.date_planted = params[:date_planted]
   @vegetable.save

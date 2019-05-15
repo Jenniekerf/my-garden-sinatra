@@ -1,9 +1,10 @@
-<form method="POST" action="/vegetables/<%= @vegetable.id %>"> 
+<form action="/vegetables/<%= @vegetable.id %>" method="POST" > 
   <input type="hidden" name="_method" value="PATCH">
   <label>Edit Name:</label>
   <input type="text" name="name" value="<%=@vegetable.name%>">
   <label>Change Date:</label>
   <input id="datetime" type="date" name="date_planted"><br>
+  <br>
   <input id="submit" type="submit" name="Edit Garden">
 </form>
 
@@ -11,6 +12,8 @@
 
 <form action="/vegetables/<%= @vegetable.id %>" method="POST">
   <input type="hidden" name="_method" value="delete">
+  <label>Delete Vegetable:</label><br>
+  <br>
   <input type="submit" value="Delete">
 </form>
 
