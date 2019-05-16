@@ -39,9 +39,9 @@ end
 	  erb :'gardeners/error'
 	end
  
- get '/gardeners/goodbye' do 
+ get '/logout' do 
     session.clear
-   erb :'gardeners/goodbye'
+   erb :'/gardeners/goodbye'
  end
  
   
