@@ -1,0 +1,9 @@
+<h1>Look how many vegetables we have planted!</h1>
+
+<br>
+
+<ul>
+<% @vegetables.each do |veg| %>
+<li><a href="<%="/vegetables/#{veg.id}"%>"><%=veg.name%> - <%=veg.date_planted.strftime("%B %d, %Y")%></a></li>
+<% end %>
+</ul>
