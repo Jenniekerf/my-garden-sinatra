@@ -14,7 +14,7 @@ class VegetablesController < ApplicationController
      erb :'/vegetables/new'
   end
   
-  get '/vegetables/garden' do 
+  get '/vegetables/garden' do
     @vegetables = Vegetable.all
     erb :'/vegetables/garden'
   end
@@ -25,17 +25,15 @@ class VegetablesController < ApplicationController
   
   post '/vegetables' do
     @gardener = current_user
-    #@gardener = Gardener.find_by(session[:id])
     @vegetable =  Vegetable.create(params)
     @vegetable.gardener_id = @gardener.id
-    #binding.pry
     @vegetable.save
     redirect "/vegetables/#{@vegetable.id}"
   end
   
-  get "/vegetables/:id" do
+ get "/vegetables/:id" do
     @vegetable = Vegetable.find(params[:id])
-    erb :'/vegetables/show'
+     erb :'/vegetables/show' 
   end
   
   patch '/vegetables/:id' do

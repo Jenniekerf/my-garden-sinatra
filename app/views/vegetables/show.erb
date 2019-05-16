@@ -2,6 +2,9 @@
 <h3><%=@vegetable.name%></h3>
 <label>Date planted:</label>
 <h3><%=@vegetable.date_planted.strftime("%B %d, %Y")%></h3>
+<label>Gardener:</label>
+<h3><%=@vegetable.gardener.username%></h3>
+
 <form action='/vegetables' method='get'>
   <input type="submit" value="Return to my Garden">
   </form>

@@ -4,6 +4,6 @@
 
 <ul>
 <% @vegetables.each do |veg| %>
-<li><a href="<%="/vegetables/#{veg.id}"%>"><%=veg.name%> - <%=veg.date_planted.strftime("%B %d, %Y")%></a></li>
+<li><a href="<%="/vegetables/#{veg.id}"%>"><%=veg.name%></a></li>
 <% end %>
 </ul>
