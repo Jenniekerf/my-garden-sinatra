@@ -1,4 +1,9 @@
-<h1>Take a look at your garden!</h1><br>
+<link rel="stylesheet" href="/stylesheets/main.css" />
+
+<div class="container">
+  <center><header><div><img src="\images\garden-picture.jpeg" class="img-responsive main-image"></div></header></center>
+
+<center><h1>Take a look at your garden!</h1><br>
 
 <ul>
 <% @gardener.vegetables.each do |veg| %>
@@ -9,10 +14,10 @@
 <h3>If you have planted any new vegetables, add them <a href="/vegetables/new">here</a></h3>
 
 <h3>If you'd like to edit or delete your vegetables, just click on them!</h3>
-
+<br>
 <h3>Enough gardening for today?</h3>
 <form action="/logout" method="get">
   <input type="submit" value="Logout">
-</form>
+</form></center>
 
-
+</div>
