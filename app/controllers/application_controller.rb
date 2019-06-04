@@ -12,14 +12,14 @@ class ApplicationController < Sinatra::Base
   get "/" do
     erb :'gardeners/index'
   end
-  
+
   helpers do
     def logged_in?
       !!session[:gardener_id]
-    end 
-    
+    end
+
     def current_user
-      Gardener.find_by_id(session[:gardener_id])
+      gardener ||= Gardener.find_by_id(session[:gardener_id])
     end
   end
 

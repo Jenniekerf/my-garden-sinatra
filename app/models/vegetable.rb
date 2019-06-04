@@ -1,3 +1,3 @@
-class Vegetable < ActiveRecord::Base 
+class Vegetable < ActiveRecord::Base
   belongs_to :gardener
 end
